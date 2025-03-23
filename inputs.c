@@ -1,45 +1,33 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+#define NUM_PEDIDOS_ARQUIVO 6
+#define NUM_ARQUIVOS 10
 
 int main() {
     FILE *file;
 
-    // Criando o arquivo pedido_0.txt
-    file = fopen("pedido_0.txt", "w");
-    if (file != NULL) {
-        fprintf(file, "João 101 2\n");
-        fprintf(file, "Maria 202 1\n");
-        fprintf(file, "Carlos 303 3\n");
+    for (int i = 0; i < NUM_ARQUIVOS; i++) {
+        char filename[50];
+        sprintf(filename, "pedido_%d.txt", i);
+        file = fopen(filename, "w");
+
+        if (file == NULL) {
+            perror("Erro ao criar arquivo");
+            exit(1);
+        }
+
+        for (int j = 0; j < NUM_PEDIDOS_ARQUIVO; j++) {
+            int idMedicamento = 100 + rand() % 350; // entre 100 e 449
+            int quantidade = 1 + rand() % 10;        // entre 1 e 10
+
+            fprintf(file, "Paciente_%d %d %d\n",
+                    j, idMedicamento, quantidade);
+        }
         fclose(file);
+        printf("Arquivo %s criado com %d pedidos.\n", filename, NUM_PEDIDOS_ARQUIVO);
     }
 
-    // Criando o arquivo pedido_1.txt
-    file = fopen("pedido_1.txt", "w");
-    if (file != NULL) {
-        fprintf(file, "Ana 101 1\n");
-        fprintf(file, "Pedro 204 2\n");
-        fprintf(file, "Luana 303 4\n");
-        fclose(file);
-    }
-
-    // Criando o arquivo pedido_2.txt
-    file = fopen("pedido_2.txt", "w");
-    if (file != NULL) {
-        fprintf(file, "Fernanda 405 1\n");
-        fprintf(file, "Thiago 101 3\n");
-        fprintf(file, "Juliana 202 2\n");
-        fclose(file);
-    }
-
-    // Criando o arquivo pedido_3.txt
-    file = fopen("pedido_3.txt", "w");
-    if (file != NULL) {
-        fprintf(file, "Ricardo 303 5\n");
-        fprintf(file, "Marta 204 1\n");
-        fprintf(file, "Lucas 101 2\n");
-        fclose(file);
-    }
-
-    printf("Arquivos de pedido com 3 ordens cada foram criados com sucesso!\n");
-
+    printf("Todos os arquivos de pedido foram criados com sucesso!\n");
     return 0;
 }

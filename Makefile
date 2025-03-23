@@ -21,7 +21,7 @@ $(TARGET): generate_inputs main.c
 
 # Limpar os arquivos gerados
 clean:
-	rm -f $(TARGET) pedido_0.txt pedido_1.txt pedido_2.txt pedido_3.txt
+	rm -f $(TARGET) prog pedido_*.txt
 
 # Regra para compilar, gerar os arquivos de entrada e rodar o programa
 full: all
