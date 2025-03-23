@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUM_PEDIDOS_ARQUIVO 6
-#define NUM_ARQUIVOS 10
+#define NUM_PEDIDOS_ARQUIVO 3
+#define NUM_ARQUIVOS 4
 
 int main() {
     FILE *file;

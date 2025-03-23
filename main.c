@@ -58,9 +58,9 @@ void *produtor(void *arg) {
         buffer[writepos] = pedido;  // Coloca a ordem no buffer
         writepos = (writepos + 1) % MAX_ORDERS;
 
+        total_orders++;    // Incrementa o total de ordens
         sem_post(&lock);   // Libera o bloqueio da escrita
         sem_post(&full);   // Informa que há um pedido pronto para ser consumido
-        total_orders++;    // Incrementa o total de ordens
     }
 
     // Enviar uma ordem de término
@@ -75,6 +75,10 @@ void *produtor(void *arg) {
     producers_done++;  // Marca que este produtor terminou
 
     fclose(file);  // Fecha o arquivo apenas depois de processar todos os pedidos
+    fopen(filename, "w");  // Abre o arquivo para escrita, limpando o conteúdo
+    fprintf (file, "Arquivo %s processado com sucesso!\n", filename);
+    fprintf (file, "total de pedidos processados: %d\n", total_orders);
+    fclose(file);
     return NULL;
 }
 
@@ -113,12 +117,10 @@ int main() {
     pthread_t cons;
 
     // Lista de arquivos para os produtores
-    ParametroProdutor parametros[N] = {
-        {"pedido_0.txt"},
-        {"pedido_1.txt"},
-        {"pedido_2.txt"},
-        {"pedido_3.txt"}
-    };
+    ParametroProdutor parametros[N];
+    for (int i = 0; i < N; i++) {
+        sprintf(parametros[i].filename, "pedido_%d.txt", i);
+    }
 
     // Inicialização dos semáforos
     sem_init(&empty, 0, N);  // N slots livres
