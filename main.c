@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define N 4  // Número de produtores
-#define MAX_ORDERS 12  // Número total de ordens (4 produtores x 3 ordens por produtor)
+#define MAX_ORDERS 4  // Número total de ordens (4 produtores x 3 ordens por produtor)
 
 typedef struct {
     char nome_paciente[100];
