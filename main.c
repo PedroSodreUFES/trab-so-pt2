@@ -6,7 +6,7 @@
 
 #define N 4  // Número de produtores
 #define NUM_ORDERS 3  // Número de ordens por produtor
-#define MAX_ORDERS 4  // Número total de ordens (4 produtores x 3 ordens por produtor)
+#define MAX_ORDERS 4 
 
 typedef struct {
     char nome_paciente[100];
@@ -76,6 +76,7 @@ void *produtor(void *arg) {
     producers_done++;  // Marca que este produtor terminou
 
     fclose(file);  // Fecha o arquivo apenas depois de processar todos os pedidos
+    
     file = fopen(filename, "a");  // Abre o arquivo para escrita, limpando o conteúdo
     fprintf (file, "Arquivo %s processado com sucesso!\n", filename);
     fprintf (file, "total de pedidos processados: %d\n", total_orders);
