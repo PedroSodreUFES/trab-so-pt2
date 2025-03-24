@@ -76,7 +76,7 @@ void *produtor(void *arg) {
     producers_done++;  // Marca que este produtor terminou
 
     fclose(file);  // Fecha o arquivo apenas depois de processar todos os pedidos
-    fopen(filename, "w");  // Abre o arquivo para escrita, limpando o conteúdo
+    file = fopen(filename, "a");  // Abre o arquivo para escrita, limpando o conteúdo
     fprintf (file, "Arquivo %s processado com sucesso!\n", filename);
     fprintf (file, "total de pedidos processados: %d\n", total_orders);
     fclose(file);
