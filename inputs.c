@@ -17,9 +17,10 @@ int main() {
         }
 
         int numPedidos = rand() % 101;
+        int id = rand() % 1000;
 
         for (int j = 0; j < numPedidos; j++) {
-            int idMedicamento = 100 + rand() % 350; // entre 100 e 449
+            int idMedicamento = id; // entre 100 e 449
             int quantidade = 1 + rand() % 10;        // entre 1 e 10
 
             fprintf(file, "Paciente_%d %d %d\n",
